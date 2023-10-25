@@ -41,7 +41,7 @@ const SearchParams = () => {
           />
         </label>
 
-        <lable htmlFor="animal">
+        <label htmlFor="animal">
           Animal
           <select
             id="animal"
@@ -56,9 +56,9 @@ const SearchParams = () => {
               <option key={animal}>{animal}</option>
             ))}
           </select>
-        </lable>
+        </label>
 
-        <lable htmlFor="breed">
+        <label htmlFor="breed">
           Breeds
           <select
             id="breed"
@@ -73,7 +73,7 @@ const SearchParams = () => {
               <option key={breed}>{breed}</option>
             ))}
           </select>
-        </lable>
+        </label>
         <button>Submit</button>
       </form>
       <Results pets={pets} />
