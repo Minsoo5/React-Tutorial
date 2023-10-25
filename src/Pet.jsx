@@ -1,6 +1,10 @@
 const Pet = ({ name, animal, breed, images, location, id }) => {
   let hero = "http://pets-images.dev-apis.com/pets/none.jpg";
-  if (images && images.length) {
+
+  console.log("Triggered outside conditional");
+
+  if (images.length) {
+    console.log("Triggered in conditional");
     hero = images[0];
   }
 
