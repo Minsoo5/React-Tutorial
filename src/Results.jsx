@@ -1,6 +1,7 @@
 import Pet from "./Pet";
 
 const Results = ({ pets }) => {
+  // Grabs each pet from pets and maps it out with its values
   return (
     <div className="search">
       {!pets.length ? (
