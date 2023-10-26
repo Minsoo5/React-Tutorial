@@ -8,11 +8,11 @@ const SearchParams = () => {
   const [animal, setAnimal] = useState("");
   const [breed, setBreed] = useState("");
   const [pets, setPets] = useState([]);
-  const [breeds] = useBreedList(animal);
+  const [breeds] = useBreedList(animal); // Calls use BreedList which does another async function
 
   useEffect(() => {
     requestPets();
-  }, []);
+  }, []); // [] allows the useEffect to run once for now to grab the pet JSON
 
   async function requestPets() {
     const res = await fetch(
@@ -24,6 +24,7 @@ const SearchParams = () => {
   }
 
   return (
+    // On submit modifes the fetch request with user inputs with the hooks up top
     <div className="search-params">
       <form
         onSubmit={(e) => {
@@ -81,6 +82,7 @@ const SearchParams = () => {
       <Results pets={pets} />
     </div>
   );
+  // On Submit Results is passed pets with a changed state
 };
 
 export default SearchParams;
