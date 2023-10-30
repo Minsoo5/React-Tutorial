@@ -10,6 +10,10 @@ import Modal from "./Modal";
 const Details = () => {
   const [showModal, setShowModal] = useState(false);
   const navigate = useNavigate();
+
+  const value = useContext(AdoptedPetContext);
+  console.log(value);
+
   // eslint-disable-next-line no-unused-vars
   const [_, setAdoptedPet] = useContext(AdoptedPetContext);
   const { id } = useParams(); //Pulling from a side data of context. Pulls data that is known to BrowserRouter
@@ -30,30 +34,28 @@ const Details = () => {
     <div className="details">
       <Carousel images={pet.images} />
       <div>
-        <h1>{pet.animal}</h1>
-        <h2>
-          {pet.animal} — {pet.breed} — {pet.city}, {pet.state}
-          <button onClick={() => setShowModal(true)}>Adopt {pet.name}</button>
-          <p>{pet.description}</p>
-          {showModal ? (
-            <Modal>
-              <div>
-                <h1>Would you like to adopt {pet.name}?</h1>
-                <div className="buttons">
-                  <button
-                    onClick={() => {
-                      setAdoptedPet(pet);
-                      navigate("/");
-                    }}
-                  >
-                    Yes
-                  </button>
-                  <button onClick={() => setShowModal(false)}>No</button>
-                </div>
+        <h1>{pet.name}</h1>
+        <h2>{`${pet.animal} — ${pet.breed} — ${pet.city}, ${pet.state}`}</h2>
+        <button onClick={() => setShowModal(true)}>Adopt {pet.name}</button>
+        <p>{pet.description}</p>
+        {showModal ? (
+          <Modal>
+            <div>
+              <h1>Would you like to adopt {pet.name}?</h1>
+              <div className="buttons">
+                <button
+                  onClick={() => {
+                    setAdoptedPet(pet);
+                    navigate("/");
+                  }}
+                >
+                  Yes
+                </button>
+                <button onClick={() => setShowModal(false)}>No</button>
               </div>
-            </Modal>
-          ) : null}
-        </h2>
+            </div>
+          </Modal>
+        ) : null}
       </div>
     </div>
   );
