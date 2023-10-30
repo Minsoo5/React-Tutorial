@@ -11,11 +11,10 @@ const Details = () => {
   const [showModal, setShowModal] = useState(false);
   const navigate = useNavigate();
 
-  const value = useContext(AdoptedPetContext);
-  console.log(value);
-
   // eslint-disable-next-line no-unused-vars
   const [_, setAdoptedPet] = useContext(AdoptedPetContext);
+  console.log(_);
+
   const { id } = useParams(); //Pulling from a side data of context. Pulls data that is known to BrowserRouter
   const results = useQuery(["details", id], fetchPet); // "details" type of request and passing in the id for the query key
 
