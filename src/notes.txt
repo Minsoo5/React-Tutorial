@@ -1,0 +1,56 @@
+Elements:
+    Elements can have className to be labled for css to apply styling to.
+    <div className="calender">This text will have whatever the "calender" styling is</div>
+
+Components:
+    Components are always capitalized, jsx will not recognize it otherwise.
+    Components can be exported then imported wherever.
+
+    <MyComponent name="John Smith" location="Philadelphia" age={32} isHere={true} />
+
+    The key:value pair sent in with the component with be passed down as props
+    For the values: "String Literal" {num} {boolean} {etc}
+
+    If I create a function to run when an event happens like showResults() when passing them in as the value for onClick do NOT include the ()
+        Yes: <button onClick={showResults}></button>
+        
+        No: <button onClick={showResults()}></button>
+
+Props: 
+    props are literally js objects and its values can be accessed like public variables
+    props / information can be passed from parent to child but not the other way up... unless you use portals... kind of...
+
+    function MyComponent(props) {
+        return (
+            <div>
+            <p>Name: {props.name}</p>
+            <p>Location: {props.location}</p>
+            <p>Age: {props.age}</p>
+            <p>Here: {props.isHere ? "Yes" : "No"}
+            </div>
+        );
+    }
+
+    PropTypes help ensure whatever value gets passed through the component is of the right type.
+    
+    MyComponent.propTypes = {
+        name: PropTypes.string,
+        location: PropTypes.string,
+        age: PropTypes.number,
+        isHere: PropTypes.bool
+    }
+
+    defaultProps are just default values that gets used when one isnt passed in.
+
+    MyComponent.defaultProps = {
+        name: "John Doe",
+        location: "Washington D.C.",
+        age: 42,
+        isHere: true
+    }
+
+Context:
+    Generalized app level state, like a current logged in user.
+    Wanna use sparingly and be precise on what state is available at which part of the app.
+    BrowserRouter and QueryClientProvider use context under the hood. 
+
