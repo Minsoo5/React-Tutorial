@@ -2,6 +2,8 @@ Elements:
     Elements can have className to be labled for css to apply styling to.
     <div className="calender">This text will have whatever the "calender" styling is</div>
 
+
+
 Components:
     Components are always capitalized, jsx will not recognize it otherwise.
     Components can be exported then imported wherever.
@@ -15,6 +17,8 @@ Components:
         Yes: <button onClick={showResults}></button>
         
         No: <button onClick={showResults()}></button>
+
+
 
 Props: 
     props are literally js objects and its values can be accessed like public variables
@@ -48,6 +52,21 @@ Props:
         age: 42,
         isHere: true
     }
+
+    You can also sepcify a default value in the component variable.
+        function Button({text='Default Button Text'}) {
+            return (
+                <Button>{text}</Button>
+            );
+        }
+    
+        This is display 'Default Button Text' by default unless: 
+
+        <Button text="EASY" />
+
+        In which case the button will display "EASY".
+
+
 
 Context:
     Generalized app level state, like a current logged in user.
