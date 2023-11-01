@@ -1,6 +1,7 @@
 import { useContext, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
+import { PetAPIResponse } from "./APIResponsesTypes";
 import AdoptedPetContext from "./AdoptedPetContext";
 import ErrorBoundary from "./ErrorBoundary";
 import Carousel from "./Carousel";
@@ -8,15 +9,19 @@ import fetchPet from "./fetchPet";
 import Modal from "./Modal";
 
 const Details = () => {
+  const { id } = useParams(); //Pulling from a side data of context. Pulls data that is known to BrowserRouter
+
+  if (!id) {
+    throw new Error("There is no id!!!");
+  }
+
   const [showModal, setShowModal] = useState(false);
   const navigate = useNavigate();
+  const results = useQuery<PetAPIResponse>(["details", id], fetchPet); // "details" type of request and passing in the id for the query key
 
-  // eslint-disable-next-line no-unused-vars
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [_, setAdoptedPet] = useContext(AdoptedPetContext);
   console.log(_);
-
-  const { id } = useParams(); //Pulling from a side data of context. Pulls data that is known to BrowserRouter
-  const results = useQuery(["details", id], fetchPet); // "details" type of request and passing in the id for the query key
 
   if (results.isLoading) {
     return (
@@ -27,7 +32,10 @@ const Details = () => {
     // Loads a spinning image while results are loading
   }
   // At this point results as loaded
-  const pet = results.data.pets[0];
+  const pet = results?.data?.pets[0];
+  if (!pet) {
+    throw new Error("Hey! There is no pet!!!");
+  }
 
   return (
     <div className="details">
@@ -60,11 +68,11 @@ const Details = () => {
   );
 };
 
-function DetailsErrorBoundary(props) {
+function DetailsErrorBoundary() {
   // using the spread operator ({...props}) here is okay since we dont care what the properties are, just go through the error boundary.
   return (
     <ErrorBoundary>
-      <Details {...props} />
+      <Details />
     </ErrorBoundary>
   );
 }
