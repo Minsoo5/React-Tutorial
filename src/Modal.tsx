@@ -1,10 +1,8 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, MutableRefObject, ReactElement } from "react";
 import { createPortal } from "react-dom";
 
-const modalRoot = document.getElementById("modal");
-
-const Modal = ({ children }) => {
-  const elRef = useRef(null); // Ref allows us to use the same piece of 'something' everytime and get it back, like a same div everytime.
+const Modal = ({ children }: { children: ReactElement }) => {
+  const elRef: MutableRefObject<HTMLDivElement | null> = useRef(null); // Ref allows us to use the same piece of 'something' everytime and get it back, like a same div everytime.
   if (!elRef.current) {
     // elRef works here almost like a container to get the same thing back each time.
     elRef.current = document.createElement("div"); // This div now operates like a singleton
@@ -14,9 +12,17 @@ const Modal = ({ children }) => {
   // When it will re-run is defined by the dependcies inside the [].
 
   useEffect(() => {
+    const modalRoot = document.getElementById("modal");
+    if (!modalRoot || !elRef.current) {
+      return;
+    }
     modalRoot.appendChild(elRef.current);
 
-    return () => modalRoot.removeChild(elRef.current);
+    return () => {
+      if (elRef.current) {
+        modalRoot.removeChild(elRef.current);
+      }
+    };
   }, []);
 
   return createPortal(<div>{children}</div>, elRef.current);
