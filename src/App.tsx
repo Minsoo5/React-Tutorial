@@ -4,7 +4,7 @@ import { Link, BrowserRouter, Routes, Route } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import AdoptedPetContext from "./AdoptedPetContext";
 import SearchParams from "./SearchParams";
-import Details from "./Details.tsx";
+import Details from "./Details";
 import { Pet } from "./APIResponsesTypes";
 
 const queryClient = new QueryClient({

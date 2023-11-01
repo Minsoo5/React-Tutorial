@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 // ErrorBoundary can ONLY be written in class component and not in a functional component
 // The methods getDerivedStateFromError and componentDidCatch are class methods
 
-class ErrorBoundary extends Component<{ Children: ReactElement }> {
+class ErrorBoundary extends Component<{ children: ReactElement }> {
   state = { hasError: false };
   static getDerivedStateFromError() {
     return { hasError: true };
@@ -24,7 +24,7 @@ class ErrorBoundary extends Component<{ Children: ReactElement }> {
         </h2>
       );
     }
-    return this.props.Children;
+    return this.props.children;
   }
 }
 
