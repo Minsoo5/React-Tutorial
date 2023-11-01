@@ -1,6 +1,7 @@
+import { Pet as PetType } from "./APIResponsesTypes";
 import Pet from "./Pet";
 
-const Results = ({ pets }) => {
+const Results = ({ pets }: { pets: PetType[] }) => {
   // Grabs each pet from pets and maps it out with its values
   // And calls on the Pet component to do so
   return (

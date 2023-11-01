@@ -1,7 +1,9 @@
 import { createContext } from "react";
 import { Pet } from "./APIResponsesTypes";
 
-const AdoptedPetContext = createContext<[Pet, (adoptedPet: Pet) => void]>([
+const AdoptedPetContext = createContext<
+  [Pet | null, (adoptedPet: Pet) => void]
+>([
   {
     id: 1337,
     name: "Fido",
@@ -14,7 +16,5 @@ const AdoptedPetContext = createContext<[Pet, (adoptedPet: Pet) => void]>([
   },
   () => {},
 ]); // Could put in default value in createContext()
-
-console.log(`From inside AdoptedPetContext: ${AdoptedPetContext}`);
 
 export default AdoptedPetContext;

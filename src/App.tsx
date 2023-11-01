@@ -5,6 +5,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import AdoptedPetContext from "./AdoptedPetContext";
 import SearchParams from "./SearchParams";
 import Details from "./Details.tsx";
+import { Pet } from "./APIResponsesTypes";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -17,9 +18,10 @@ const queryClient = new QueryClient({
 
 // BrowserRouter and QueryProvides are higher order components. They wrap other components but they themselves do not display anything
 // They provide context to the components underneath it.
+
 const App = () => {
   // Displays Adopt Me and SearchParams on "/" which is default
-  const adoptedPetHook = useState(null);
+  const adoptedPetHook = useState(null as Pet | null);
   return (
     <BrowserRouter>
       <QueryClientProvider client={queryClient}>
@@ -38,5 +40,10 @@ const App = () => {
 };
 
 const container = document.getElementById("root");
+
+if (!container) {
+  throw new Error("Container non-existing.");
+}
+
 const root = createRoot(container);
 root.render(<App />);
