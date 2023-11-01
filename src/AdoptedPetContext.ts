@@ -10,6 +10,7 @@ const AdoptedPetContext = createContext<[Pet, (adoptedPet: Pet) => void]>([
     breed: "Beagle",
     images: [],
     city: "Seattle",
+    state: "WA",
   },
   () => {},
 ]); // Could put in default value in createContext()

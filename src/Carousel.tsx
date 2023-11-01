@@ -20,7 +20,11 @@ class Carousel extends Component<IProps> {
     images: ["http://pets-images.dev-apis.com/pets/none.jpg"],
   };
 
-  handleIndexClick = (event: MouseEvent<HTMLButtonElement>) => {
+  handleIndexClick = (event: MouseEvent<HTMLElement>) => {
+    if (!(event.target instanceof HTMLElement)) {
+      return;
+    }
+
     if (event.target.dataset.index) {
       this.setState({
         active: +event.target.dataset.index,
